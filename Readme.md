@@ -33,3 +33,7 @@ With enough recordings, we'll work on understanding the communicaton protocol, t
 * [Ultrasound Tracking Beacons Making Things Sort of Creepy For Consumers](https://www.alienvault.com/blogs/security-essentials/ultrasound-tracking-beacons-making-things-sort-of-creepy-for-consumers)
 * [How to Block the Ultrasonic Signals You Didn’t Know Were Tracking You](https://www.wired.com/2016/11/block-ultrasonic-signals-didnt-know-tracking/)
 * [Beware of ads that use inaudible sound to link your phone, TV, tablet, and PC](http://arstechnica.com/tech-policy/2015/11/beware-of-ads-that-use-inaudible-sound-to-link-your-phone-tv-tablet-and-pc/) Privacy advocates warn feds about surreptitious cross-device tracking.
+
+# Found more on Jan 2017
+
+* http://qraider.com/XT/FAQ/#0
