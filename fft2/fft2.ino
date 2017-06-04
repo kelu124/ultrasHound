@@ -9,11 +9,14 @@
 #include <Adafruit_SSD1306.h>
 //#include <adafruit_feather.h>
 
+
+
 // FFT
 #define LOG_OUT 1 // use the log output function
 #define FFT_N 256 // set to 256 point fft 
 #include <FFT.h> // include the library
 #define MicPin A5
+
 
 // OLED
 #define OLED_RESET 4
@@ -37,9 +40,10 @@ unsigned long time2 = 0;
 
 #define BUFFERSIZE FFT_N
 
-//uint16_t fft_input[BUFFERSIZE];
-int k = 0;
 
+
+int k = 0;
+int i = 0;
 // The different settings set the ADC clock frequency, the conversion time
 // and the equivalent number of bits
 
@@ -49,7 +53,7 @@ int k = 0;
 // ADC_TIME_13     f=1MHz     Tconv=13us     ENOB > 8
 
 /*************************************************************************/
- 
+
 
 // Test program that converts A0 four times using the
 // four timming options
@@ -74,9 +78,9 @@ void setup() {
 
 #if FASTADC
   // set prescale to 16
-  sbi(ADCSRA,ADPS2) ;
-  cbi(ADCSRA,ADPS1) ;
-  cbi(ADCSRA,ADPS0) ;
+  sbi(ADCSRA, ADPS2) ;
+  cbi(ADCSRA, ADPS1) ;
+  cbi(ADCSRA, ADPS0) ;
 #endif
 
 
@@ -87,8 +91,13 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println("== Test starting == ");
+  display.println(F("== Test starting == "));
+  display.print(F("Free SRAM: ->  "));
+  display.println(freeRam ());
   display.display();
+
+
+
   digitalWrite(13, LOW);
   delay(2000);
 }
@@ -103,13 +112,13 @@ void loop() {
     if (lu == 1) {
       display.println("Lu == 1");
       display.display();
-          
-    
+
+
       transmit();
 
 
     }
-lu = 0;
+    lu = 0;
   }
   delay(1000);
 
@@ -123,64 +132,83 @@ lu = 0;
 void transmit()
 {
 
-  int i = 0;
+
 
   int l = 0;
 
 
-
+  i = 0;
+  time1 = micros();
+  noInterrupts();
+  while (i < FFT_N) {
+    fft_input[2*i] = 0;
+    fft_input[2*i+1] = 0;
+    i++;
+  }
   digitalWrite(13, HIGH);
   // turn the LED on (HIGH is the voltage level)
   delay(100);              // wait for a second
 
 
 
-//  ADC_TIME_52; // Normal Aduino Setting (52us)
+  //  ADC_TIME_52; // Normal Aduino Setting (52us)
   i = 0;
   time1 = micros();
   noInterrupts();
   while (i < FFT_N) {
-    fft_input[i] = analogRead(A5);
+    fft_input[2*i] = analogRead(A5);
+    //fft_input[2*i+1] = 0;
     i++;
   }
-      interrupts();
-    time2 = micros();
-
-Serial.print("RawData; ");
-    l = 0;
-    while (l < FFT_N) {
-      Serial.print(fft_input[l]);
-      Serial.print(";");
-      l++;
-    }
-    Serial.println("EOF");
-    
-    fft_window();
-    fft_reorder(); // reorder the data before doing the fft
-    fft_run(); // process the data in the fft
-fft_mag_log();
+  interrupts();
+  time2 = micros();
 
 
 
-    Serial.print("Line ");Serial.print(time1);Serial.print(" "); Serial.print(time2); Serial.print(" ");
-    l = 0;
-    int high;
-    while (l < FFT_N/2) {
-      high = fft_log_out[l];
-      
-      Serial.print(high);
-      Serial.print(";");
-      l++;
-    }
-  
+  l = 0;
+  while (l < FFT_N) {
+
+    Serial.print(fft_input[2*l]);
+    Serial.print(";");
+    l++;
+  }
+  Serial.println("EOF");
+  //fft_window();
+  fft_reorder(); // reorder the data before doing the fft
+  fft_run(); // process the data in the fft
+  fft_mag_log();
+
+
+
+  Serial.print("Line "); Serial.print(time1); Serial.print(" "); Serial.print(time2); Serial.print(" ");
+  l = 0;
+  int high = 0;
+  while (l < FFT_N) {
+    high = ((unsigned int)sq(fft_input[l << 1]) + (unsigned int)sq(fft_input[(l << 1) + 1])) >> 1; //the bin value really = sqrt(sq(re) + sq(im)) but this is faster and is still easy to read
+    //high = fft_log_out[l];
+    Serial.print(high);
+    Serial.print(";");
+    l++;
+  }
+
   Serial.println("EOF");
   int value = 0;
   i = 0;
   display.clearDisplay();
-
+  display.setCursor(0, 0);
+  display.println(freeRam ());
+  display.display();
 
   digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
   delay(200);              // wait for a second
 
+}
+
+
+int freeRam ()
+{
+  extern int __heap_start, *__brkval;
+  int v;
+  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
 
