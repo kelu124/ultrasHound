@@ -6,9 +6,11 @@ This project is a first of its kind to serve as a tracker of trackers, to know w
 
 It could also possibly act as a spoofer. 
 
-### How would it be made ?
+See more on [hackaday](https://hackaday.io/project/25095-ushound).
 
-Let's KISS
+### Modules used
+
+Let's Keep It Simple Stupid
 
 * Arduino
 * Electret
@@ -25,6 +27,12 @@ Any suspicious signals will be tracked.
 
 With enough recordings, we'll work on understanding the communicaton protocol, to use in a last phase.
 
+# Some results
+
+Tested with [18kHz](/18khz.wav) and [20kHz](/20khz.wav) wav soundfiles, the peaks are well resolved:
+
+
+![](/acquisitions.png)
 
 
 # Read more
@@ -33,6 +41,20 @@ With enough recordings, we'll work on understanding the communicaton protocol, t
 * [Ultrasound Tracking Beacons Making Things Sort of Creepy For Consumers](https://www.alienvault.com/blogs/security-essentials/ultrasound-tracking-beacons-making-things-sort-of-creepy-for-consumers)
 * [How to Block the Ultrasonic Signals You Didn’t Know Were Tracking You](https://www.wired.com/2016/11/block-ultrasonic-signals-didnt-know-tracking/)
 * [Beware of ads that use inaudible sound to link your phone, TV, tablet, and PC](http://arstechnica.com/tech-policy/2015/11/beware-of-ads-that-use-inaudible-sound-to-link-your-phone-tv-tablet-and-pc/) Privacy advocates warn feds about surreptitious cross-device tracking.
+* [Hackaday blog post](http://hackaday.com/2017/05/04/ultrasonic-tracking-beacons/)
+* [An excellent paper](http://christian.wressnegger.info/content/projects/sidechannels/2017-eurosp.pdf)
+
+## Frameworks using the ultrasound beacons
+
+* Silverpush
+* Shopkick
+* lisnr 
+* Signal360
+
+## Sources
+
+* https://raw.githubusercontent.com/MAVProxyUser/SilverPushUnmasked/master/Grace%20Poe%20TVC%202015.mp4
+* https://raw.githubusercontent.com/MAVProxyUser/SilverPushUnmasked/master/Test%2020151026155430.mp4
 
 # Found more on Jan 2017
 
