@@ -29,7 +29,7 @@ With enough recordings, we'll work on understanding the communicaton protocol, t
 
 # Some results
 
-Tested with [18kHz](/18khz.wav) and [20kHz](/20khz.wav) wav soundfiles, the peaks are well resolved:
+Tested with [18kHz](/feather/18khz.wav) and [20kHz](/feather/20khz.wav) wav soundfiles, the peaks are well resolved:
 
 
 ![](/acquisitions.png)
