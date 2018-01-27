@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+
+# Mapping the spectrogram of a wav file, searching for ultrasound data and normalizing it
+# (c) kelu124
+
 from scipy.io.wavfile import read as wavread
 import matplotlib.pyplot as plt
 import numpy as np
