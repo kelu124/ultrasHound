@@ -8,6 +8,16 @@ It could also possibly act as a spoofer.
 
 See more on [hackaday](https://hackaday.io/project/25095-ushound).
 
+### TOGET!
+
+* 10.1080/10739149.2014.971329
+* 10.1111/2041-210X.12678
+* https://www.wired.com/story/when-wifi-wont-work-let-sound-carry-your-data/
+
+* Excellent! 2016
+  * http://www.medicaldaily.com/schools-train-station-libraries-museum-ultrasound-tim-leighton-public-exposure-370550
+  * http://dx.doi.org/10.1098/rspa.2015.0624
+
 ### Modules used
 
 Let's Keep It Simple Stupid
