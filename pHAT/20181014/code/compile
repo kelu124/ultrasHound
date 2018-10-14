@@ -1,0 +1,2 @@
+gcc -pthread -o ad ad.c -lpigpio
+gcc -pthread -o spi-speed spi-speed.c -lpigpio
